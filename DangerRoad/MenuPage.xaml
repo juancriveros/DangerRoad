@@ -1,0 +1,15 @@
+﻿<Page x:Class="DangerRoad.MenuPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DangerRoad"
+        mc:Ignorable="d"
+        Title="Car Road">
+    <Canvas Name="MyCanvas" Focusable="True">
+        <Canvas.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Resources/Images/RoadBackground.png"></ImageBrush>
+        </Canvas.Background>
+        <Button x:Name="PlayButton" Content="Play" Canvas.Left="154" Canvas.Top="210" Height="83" Width="145" Click="PlayGame" Panel.ZIndex="1"/>
+    </Canvas>
+</Page>
