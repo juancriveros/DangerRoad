@@ -10,6 +10,10 @@
         <Canvas.Background>
             <ImageBrush ImageSource="pack://application:,,,/Resources/Images/RoadBackground.png"></ImageBrush>
         </Canvas.Background>
-        <Button x:Name="PlayButton" Content="Play" Canvas.Left="154" Canvas.Top="210" Height="83" Width="145" Click="PlayGame" Panel.ZIndex="1"/>
+        <Button x:Name="PlayButton" Content="Play" Canvas.Left="150" Canvas.Top="200" Height="40" Width="150" Click="PlayGame" Background="#FF656565" Foreground="Yellow" Panel.ZIndex="1"/>
+        <Button x:Name="InstructionsButton" Content="Instructions" Canvas.Left="150" Canvas.Top="250" Height="40" Width="150" Click="Instructions" Background="#FF656565" Foreground="Yellow" Panel.ZIndex="1"/>
+        <Button x:Name="ExitButton" Content="Exit" Canvas.Left="150" Canvas.Top="300" Height="40" Width="150" Click="Exit" Background="#FF656565" Foreground="Yellow" Panel.ZIndex="1"/>
+        <TextBlock x:Name="InstructionsText" Canvas.Left="150" Canvas.Top="200" Text="TextBlock" TextWrapping="Wrap" Height="140" Width="150" Background="#FF656565" Foreground="Yellow" Panel.ZIndex="1" Visibility="Hidden"/>
+        <Button x:Name="BackButton" Content="Back" Canvas.Left="150" Canvas.Top="350" Height="40" Width="150" Click="GoBack" Background="#FF656565" Foreground="Yellow" Panel.ZIndex="1" Visibility="Hidden"/>
     </Canvas>
 </Page>

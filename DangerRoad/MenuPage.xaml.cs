@@ -109,5 +109,28 @@ namespace DangerRoad
             this.NavigationService.Navigate(new GamePage());
         }
 
+        private void Instructions(object sender, RoutedEventArgs e)
+        {
+            PlayButton.Visibility = Visibility.Hidden;
+            InstructionsButton.Visibility = Visibility.Hidden;
+            ExitButton.Visibility = Visibility.Hidden;
+            InstructionsText.Visibility = Visibility.Visible;
+            BackButton.Visibility = Visibility.Visible;
+            InstructionsText.Text = "Danger Road is a game where you have to click the cars before they leave the window ";
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            PlayButton.Visibility = Visibility.Visible;
+            InstructionsButton.Visibility = Visibility.Visible;
+            ExitButton.Visibility = Visibility.Visible;
+            InstructionsText.Visibility = Visibility.Hidden;
+            BackButton.Visibility = Visibility.Hidden;
+        }
     }
 }

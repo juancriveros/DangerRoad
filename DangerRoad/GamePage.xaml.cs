@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Windows.Themes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,13 +53,15 @@ namespace DangerRoad
             InitializeComponent();
             gameTimer.Tick += GameEngine;
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
-            RestarGame();
+            RestartGame();
         }
 
         private void GameEngine(object sender, EventArgs e)
         {
 
-            scoreText.Content = "Score: " + score;
+            StringBuilder scoreBuilder = new StringBuilder("Score: ");
+            scoreBuilder.Append(score);
+            scoreText.Content = scoreBuilder.ToString();
 
             intervals -= 5;
 
@@ -136,16 +139,14 @@ namespace DangerRoad
                 {
                     itemRemover.Add(x);
                     missedCars++;
+                    StringBuilder missedCarsBuilder = new StringBuilder("Misses: ");
+                    missedCarsBuilder.Append(missedCars.ToString());
+                    missesText.Content = missedCarsBuilder.ToString();
                 }
             }
 
             if (missedCars == 10)
-            {
-                gameIsActive = false;
-                gameTimer.Stop();
-                MessageBox.Show("You missed 10 Balloons, press space to go back to menu");
-                this.NavigationService.Navigate(new MenuPage());
-            }
+                GameOver();
 
             CheckLevels();
 
@@ -221,10 +222,7 @@ namespace DangerRoad
                         lifes--;
 
                         if (lifes == 0)
-                        {
-                            gameIsActive = false;
-                            gameTimer.Stop();
-                        }
+                            GameOver();
 
                     }
 
@@ -235,22 +233,32 @@ namespace DangerRoad
         private void StartGame()
         {
             gameTimer.Start();
-
             missedCars = 0;
             score = 0;
             intervals = 150;
             gameIsActive = true;
             speed = 10;
             lifes = 3;
+            StringBuilder missedCarsBuilder = new StringBuilder("Misses: ");
+            missedCarsBuilder.Append(missedCars.ToString());
+            missesText.Content = missedCarsBuilder.ToString();
 
         }
 
-        private void RestarGame()
+        private void RestartGame()
         {
             foreach (var x in MyCanvas.Children.OfType<Rectangle>())
             {
                 if (x.Tag.ToString() == "car")
                     itemRemover.Add(x);
+                if(x.Tag.ToString() == "bomb")
+                {
+                    ImageBrush lostLife = new ImageBrush();
+                    lostLife.ImageSource = new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "/Resources/Images/FuelFull.png"));
+                    Life1.Fill = lostLife;
+                    Life2.Fill = lostLife;
+                    Life3.Fill = lostLife;
+                }
             }
 
             foreach (Rectangle y in itemRemover)
@@ -261,5 +269,51 @@ namespace DangerRoad
             StartGame();
         }
 
+        private void GameOver()
+        {
+            PauseGame();
+            ResumeButton.Visibility = Visibility.Hidden;
+            menuText.Visibility = Visibility.Visible;
+        }
+
+        private void PauseGame()
+        {
+            HomeButton.Visibility = Visibility.Visible;
+            RestartButton.Visibility = Visibility.Visible;
+            ResumeButton.Visibility = Visibility.Visible;
+            gameIsActive = false;
+            gameTimer.Stop();
+        }
+
+        private void PauseGame(object sender, RoutedEventArgs e)
+        {
+            PauseGame();
+        }
+
+        private void ResumeGame(object sender, RoutedEventArgs e)
+        {
+            gameIsActive = true;
+            gameTimer.Start();
+            HideMenu();
+        }
+
+        private void RestartGame(object sender, RoutedEventArgs e)
+        {
+            HideMenu();
+            RestartGame();
+        }
+
+        private void HomeGame(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MenuPage());
+        }
+
+        private void HideMenu()
+        {
+            menuText.Visibility = Visibility.Hidden;
+            HomeButton.Visibility = Visibility.Hidden;
+            RestartButton.Visibility = Visibility.Hidden;
+            ResumeButton.Visibility = Visibility.Hidden;
+        }
     }
 }

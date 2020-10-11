@@ -14,6 +14,7 @@
     <None Remove="Resources\Images\FuelFull.png" />
     <None Remove="Resources\Images\GreenCar.png" />
     <None Remove="Resources\Images\GreenCarBomb.png" />
+    <None Remove="Resources\Images\Pause.png" />
     <None Remove="Resources\Images\PurpleCar.png" />
     <None Remove="Resources\Images\PurpleCarBomb.png" />
     <None Remove="Resources\Images\RedCar.png" />
@@ -43,6 +44,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\GreenCarBomb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Pause.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\PurpleCar.png">
